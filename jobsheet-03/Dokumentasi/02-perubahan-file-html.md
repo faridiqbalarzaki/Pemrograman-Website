@@ -1,85 +1,59 @@
 # 2. Apa yang Berubah di File HTML?
 
-Sama seperti transisi jobsheet-01 → jobsheet-02
-([lihat penjelasan pola ini](../../jobsheet-02/Dokumentasi/02-perubahan-file-html.md#22-kenapa-struktur-html-sengaja-tidak-diubah)),
-struktur besar HTML jobsheet-03 **tidak berubah** dari jobsheet-02.
-Ada 3 penambahan kecil namun penting di HTML, ditambah beberapa baris CSS
-baru murni di `style.css` (dibahas mulai [bab 3](03-css-hamburger-checkbox-hack.md)).
+Kabar baik: kalau kamu sudah paham
+[dokumentasi HTML jobsheet-01](../../jobsheet-01/dokumentasi/README.md),
+kamu **tidak perlu belajar ulang** struktur HTML-nya di jobsheet ini.
+Semua `header`, `nav`, `main`, `section`, `article`, `table`, `form`,
+`footer` di 5 file HTML **persis sama** dengan jobsheet-01.
 
-## 2.1 `<meta viewport>`
-
-```html
-<meta name="viewport" content="width=device-width, initial-scale=1">
-```
-
-Ditambahkan di `<head>` **semua 5 halaman** HTML, tepat di bawah
-`<meta charset="UTF-8">`. Penjelasan lengkap kenapa baris ini penting ada
-di [konsep dasar §1.2](01-konsep-dasar-responsive.md).
-
-## 2.2 Pasangan Checkbox + Label untuk Hamburger Menu
+Satu-satunya perubahan di setiap file HTML adalah **satu baris baru** di
+dalam `<head>`:
 
 ```html
-<header>
-    <h1>SIMPUS-Mini</h1>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle">
-    <label for="nav-toggle" class="nav-toggle-label">&#9776;</label>
-    <nav>
-        ...
-    </nav>
-</header>
+<link rel="stylesheet" href="assets/css/style.css">
 ```
 
-Dua elemen baru muncul di dalam `<header>`, **sebelum** `<nav>`:
+(penjelasan tag `<link>` ada di
+[konsep dasar CSS §1.3](01-konsep-dasar-css.md#13-menghubungkan-css-ke-html))
 
-- **`<input type="checkbox" id="nav-toggle" class="nav-toggle">`** —
-  sebuah kotak centang (checkbox) biasa. Tapi lewat CSS (dibahas di
-  [bab 3](03-css-hamburger-checkbox-hack.md)), checkbox ini akan
-  **disembunyikan** dari tampilan — ia dipakai bukan untuk dicentang
-  secara visual, melainkan sekadar untuk **menyimpan status**
-  "menu sedang terbuka atau tertutup" (dicentang = terbuka).
-- **`<label for="nav-toggle" class="nav-toggle-label">&#9776;</label>`** —
-  ingat dari
-  [dokumentasi jobsheet-01](../../jobsheet-01/Dokumentasi/04-buku-tambah-html.md#43-pola-setiap-isian-form-label--input),
-  atribut `for="nav-toggle"` **menghubungkan** label ini ke checkbox
-  yang `id`-nya `nav-toggle`. Efeknya: **mengklik label ini sama saja
-  dengan mengklik checkbox itu sendiri** — inilah dasar dari teknik
-  "checkbox hack" yang dijelaskan lebih detail di
-  [bab 3](03-css-hamburger-checkbox-hack.md).
-- **`&#9776;`** — ini adalah **HTML entity** berbasis kode numerik
-  (mirip `&copy;` atau `&mdash;` yang sudah dibahas di
-  [dokumentasi jobsheet-01](../../jobsheet-01/Dokumentasi/02-index-html.md#footer--kaki-halaman)),
-  menampilkan karakter simbol **☰** (tiga garis horizontal, ikon
-  "hamburger" yang lazim dipakai untuk menu di layar sempit).
+## 2.1 Path CSS Berbeda-beda per File
 
-**Penting:** ketiga elemen ini (`h1`, `input`, `label`) semuanya berada
-**langsung di dalam `<header>`**, sejajar dengan `<nav>` — bukan di
-dalam `<nav>`. Susunan ini sengaja dipilih supaya CSS bisa memanfaatkan
-**sibling combinator** (`~`) antara checkbox dan `<nav>`, dijelaskan
-detail mekanismenya di [bab 3](03-css-hamburger-checkbox-hack.md).
+Karena file `style.css` disimpan di satu lokasi (`jobsheet-02/assets/css/style.css`),
+sedangkan file-file HTML tersebar di beberapa folder dengan kedalaman
+berbeda, nilai `href` pada tag `<link>` harus disesuaikan:
 
-## 2.3 Pembungkus `<div class="table-responsive">`
+| File HTML | Lokasi File | `href` yang Dipakai |
+|---|---|---|
+| `index.html` | folder root (`jobsheet-02/`) | `assets/css/style.css` |
+| `buku/list.html` | dalam folder `buku/` | `../assets/css/style.css` |
+| `buku/tambah.html` | dalam folder `buku/` | `../assets/css/style.css` |
+| `anggota/list.html` | dalam folder `anggota/` | `../assets/css/style.css` |
+| `anggota/tambah.html` | dalam folder `anggota/` | `../assets/css/style.css` |
 
-Di `buku/list.html` dan `anggota/list.html`, tabel yang sebelumnya berdiri
-sendiri (lihat [dokumentasi jobsheet-01](../../jobsheet-01/Dokumentasi/03-buku-list-html.md#32-anatomi-tabel-html))
-sekarang dibungkus satu `<div>` tambahan:
+Polanya sama seperti path pada `<a href="...">` di menu navigasi
+([lihat penjelasan jobsheet-01 §1.5](../../jobsheet-01/dokumentasi/01-konsep-dasar.md#15-navigasi-antar-halaman-a-href)):
+`../` berarti "naik satu folder ke atas" sebelum masuk ke `assets/css/style.css`.
 
-```html
-<div class="table-responsive">
-<table>
-    ...
-</table>
-</div>
-```
+**Kesalahan paling umum** pemula saat menambahkan CSS ke banyak halaman
+di folder berbeda adalah **lupa menyesuaikan jumlah `../`** — akibatnya
+file CSS "tidak ke-load" dan halaman tetap tampil polos tanpa ada pesan
+error yang jelas di layar (biasanya baru terlihat errornya di tab
+*Console*/*Network* pada DevTools browser).
 
-`<div>` di sini dipakai murni sebagai **pembungkus teknis** untuk
-keperluan styling (`overflow-x: auto`, dibahas di
-[bab 4](04-css-table-responsive.md)) — beda dengan tag semantic
-(`header`, `section`, `article`, dst. dari
-[dokumentasi jobsheet-01](../../jobsheet-01/Dokumentasi/01-konsep-dasar.md#13-tag-semantic-html5))
-yang membawa makna konten. `<div>` memang **sengaja tidak** punya makna
-semantic — ia hanya "kotak polos" yang dipakai ketika kita butuh
-target CSS/JS tanpa perlu tag khusus. Class `table-responsive` di sini
-adalah nama yang **kita buat sendiri** (bukan nama bawaan HTML), dipilih
-supaya mudah dibaca maksudnya: "tabel yang sudah dibuat responsif".
+## 2.2 Kenapa Struktur HTML Sengaja Tidak Diubah?
 
-Lanjut ke: [CSS: Menu Hamburger dengan Checkbox Hack](03-css-hamburger-checkbox-hack.md)
+Ini keputusan desain yang penting dipahami: CSS **seharusnya** bisa
+mengubah total tampilan sebuah halaman **tanpa** perlu mengubah struktur
+HTML-nya. Prinsip ini disebut **separation of concerns** (pemisahan
+tanggung jawab) — HTML mengurus struktur/makna konten, CSS mengurus
+tampilan. Jobsheet ini sengaja dirancang begitu supaya kamu bisa
+membandingkan langsung: font "Segoe UI", warna biru pada header,
+navbar sejajar horizontal, kartu statistik yang tersusun rapi 3 kolom —
+semua itu **murni hasil CSS**, bukan HTML baru.
+
+Coba bandingkan tangkapan layar `index.html` jobsheet-01 (tanpa CSS,
+tampilan default browser, semua elemen bertumpuk vertikal polos) dengan
+`index.html` jobsheet-02 (dengan CSS) untuk melihat sendiri betapa
+besarnya efek CSS terhadap tampilan, padahal HTML-nya identik.
+
+Lanjut ke: [CSS: Reset & Gaya Dasar Body](03-css-reset-dan-body.md)

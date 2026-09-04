@@ -1,57 +1,50 @@
-# Dokumentasi Jobsheet 3 — Responsive Design
+# Dokumentasi Jobsheet 2 — CSS3 Styling Dasar
 
 Dokumentasi ini melanjutkan
-[dokumentasi jobsheet-02](../../jobsheet-02/Dokumentasi/README.md) dan
-ditujukan untuk mahasiswa yang baru belajar HTML/CSS. Kalau kamu belum
-paham HTML dasar (jobsheet-01) atau CSS dasar — Flexbox, Grid, box model
-(jobsheet-02) — sebaiknya baca dulu dokumentasi jobsheet sebelumnya karena
-bab-bab di sini akan sering merujuk balik ke sana.
+[dokumentasi jobsheet-01](../../jobsheet-01/dokumentasi/README.md) dan
+ditujukan untuk mahasiswa yang baru belajar HTML/CSS. Jika kamu belum
+paham struktur HTML dasar (`header`, `nav`, `main`, `table`, `form`, dst.),
+sebaiknya baca dulu dokumentasi jobsheet-01 sebelum lanjut ke sini.
 
-## Apa yang Baru di Jobsheet 3?
+## Apa yang Baru di Jobsheet 2?
 
-Sesuai [README.md](../README.md) jobsheet ini, ada 4 penambahan dari
-jobsheet-02:
-
-1. Tag `<meta name="viewport">` di semua halaman.
-2. Menu **hamburger** (ikon ☰) di layar sempit, dibuat murni dengan CSS
-   memakai teknik **checkbox hack** (tanpa JavaScript sama sekali).
-3. Tabel dibungkus `<div class="table-responsive">` supaya bisa di-scroll
-   ke samping di layar sempit, alih-alih memampatkan kolom sampai tidak
-   terbaca.
-4. **Media query** di `style.css` yang mengubah grid kartu statistik dari
-   3 kolom → 2 kolom → 1 kolom mengikuti lebar layar.
-
-Semua perubahan ini masuk dalam topik besar **Responsive Web Design** —
-membuat satu halaman web yang tampilannya menyesuaikan diri secara
-otomatis di berbagai ukuran layar (HP, tablet, laptop, monitor besar),
-tanpa perlu membuat halaman terpisah untuk tiap perangkat.
+Sesuai [README.md](../README.md) jobsheet ini, **struktur HTML tidak
+berubah sama sekali** dari jobsheet-01 — hanya ditambahkan satu file baru,
+`assets/css/style.css`, dan satu baris `<link rel="stylesheet">` di tiap
+halaman HTML. Jadi seluruh dokumentasi jobsheet 2 ini fokus pada **CSS**:
+apa itu CSS, bagaimana cara kerjanya, dan penjelasan baris-per-baris file
+`style.css`.
 
 ## Daftar Isi
 
-1. [Konsep Dasar Responsive Design](01-konsep-dasar-responsive.md)
+1. [Konsep Dasar CSS](01-konsep-dasar-css.md)
 2. [Apa yang Berubah di File HTML?](02-perubahan-file-html.md)
-3. [CSS: Menu Hamburger dengan Checkbox Hack](03-css-hamburger-checkbox-hack.md)
-4. [CSS: Tabel yang Bisa Di-scroll (`table-responsive`)](04-css-table-responsive.md)
-5. [CSS: Media Query & Breakpoint](05-css-media-query-breakpoint.md)
-6. [Rangkuman & Latihan Lanjutan](06-rangkuman-latihan.md)
+3. [CSS: Reset & Gaya Dasar Body](03-css-reset-dan-body.md)
+4. [CSS: Header & Navbar dengan Flexbox](04-css-header-navbar-flexbox.md)
+5. [CSS: Layout `main` & `section`](05-css-main-dan-section.md)
+6. [CSS: Kartu Statistik dengan CSS Grid](06-css-grid-kartu-statistik.md)
+7. [CSS: Styling Tabel](07-css-tabel.md)
+8. [CSS: Styling Form](08-css-form.md)
+9. [CSS: Footer](09-css-footer.md)
+10. [Rangkuman & Latihan Lanjutan](10-rangkuman-latihan.md)
 
 ## Struktur Folder
 
 ```
-jobsheet-03/
+jobsheet-02/
 ├── index.html
 ├── assets/
 │   └── css/
-│       └── style.css      # Ditambah checkbox hack + media query
+│       └── style.css      # File baru di jobsheet ini
 ├── buku/
-│   ├── list.html           # Tabel dibungkus .table-responsive
+│   ├── list.html
 │   └── tambah.html
 ├── anggota/
-│   ├── list.html           # Tabel dibungkus .table-responsive
+│   ├── list.html
 │   └── tambah.html
 ├── README.md
-└── Dokumentasi/            # Folder dokumentasi ini
+└── dokumentasi/           # Folder dokumentasi ini
 ```
 
-Silakan baca urut dari nomor 1, atau langsung loncat ke bagian yang ingin
-dipahami.
+Silakan baca urut dari nomor 1 supaya konsepnya nyambung, atau langsung
+loncat ke bagian CSS yang ingin dipahami.
