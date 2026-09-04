@@ -48,6 +48,11 @@ header nav a {
   color: #fff;
   font-weight: 500;
 }
+@media (min-width: 1400px) {
+  main {
+    max-width: 1200px;
+  }
+}
 
 /* ===== Main Layout ===== */
 main {
@@ -196,4 +201,15 @@ footer {
 
 td {
   white-space: nowrap;
+}
+
+form input,
+form select {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .grid-ringkasan {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
